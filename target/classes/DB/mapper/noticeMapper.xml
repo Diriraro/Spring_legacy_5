@@ -4,6 +4,23 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.iu.s5.notice.NoticeDAO">
+  
+  		<!-- 전체 글의 갯수 -->
+  		<select id="boardCount" resultType="java.lang.Long">
+  			select count(num) from notice
+  		</select>
+  
+  		<select id="boardList" parameterType="java.util.Map" resultType="com.iu.s5.notice.NoticeVO">
+			select * from  
+				(select N.*, rownum R from 
+					(select * from notice where num >=1 order by num desc) N)
+			where R between #{startRow} and #{lastRow}
+
+  		</select>
+  
+  		<select id="boardSelect" parameterType="java.lang.Long" resultType="com.iu.s5.notice.NoticeVO">
+  			SELECT * FROM notice WHERE num=#{num}
+  		</select>
   		
   		<insert id="boardWrite" parameterType="com.iu.s5.notice.NoticeVO">
   			INSERT INTO notice VALUES(board_seq.nextval, #{title}, #{writer}, #{contents}, sysdate, 0)
@@ -14,10 +31,10 @@
   		</delete>
   		
   		<update id="boardUpdate" parameterType="com.iu.s5.notice.NoticeVO">
-  			UPDATE notice SET title=#{title}, contents=#{contents} WHERE num=#{num}
+  			UPDATE notice SET title=#{title}, contents=#{contents}, hit=hit-1 WHERE num=#{num}
   		</update>
   		
-  		<update id="hitUpdate" parameterType="com.iu.s5.notice.NoticeVO">
+  		<update id="hitUpdate" parameterType="java.lang.Long">
   			UPDATE notice SET hit=hit+1 WHERE num=#{num}
   		</update>
   		

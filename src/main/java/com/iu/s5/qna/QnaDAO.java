@@ -1,7 +1,5 @@
-package com.iu.s5.notice;
+package com.iu.s5.qna;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.Map;
 
@@ -13,18 +11,18 @@ import com.iu.s5.board.BoardDAO;
 import com.iu.s5.board.BoardVO;
 
 @Repository
-public class NoticeDAO implements BoardDAO{
+public class QnaDAO implements BoardDAO{
 	
 	@Autowired
 	private SqlSession sqlSession;
-	private final String NAMESPACE = "com.iu.s5.notice.NoticeDAO.";
-	
+	private final String NAMESPACE = "com.iu.s5.qna.QnaDAO.";
+
 	@Override
 	public long boardCount() throws Exception {
-		return sqlSession.selectOne(NAMESPACE+"boardCount");
+		// TODO Auto-generated method stub
+		return 0;
 	}
-	
-	//noticeList
+
 	@Override
 	public List<BoardVO> boardList(Map<String, Integer> map) throws Exception {
 		return sqlSession.selectList(NAMESPACE+"boardList", map);
@@ -32,29 +30,32 @@ public class NoticeDAO implements BoardDAO{
 
 	@Override
 	public BoardVO boardSelect(long num) throws Exception {
-		return sqlSession.selectOne(NAMESPACE+"boardSelect", num);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public int boardWrite(BoardVO boardVO) throws Exception {
-		return sqlSession.insert(NAMESPACE+"boardWrite", boardVO);
-		
+		// TODO Auto-generated method stub
+		return 0;
 	}
-	
+
 	@Override
 	public int boardDelete(long num) throws Exception {
-		return sqlSession.delete(NAMESPACE+"boardDelete", num);
+		// TODO Auto-generated method stub
+		return 0;
 	}
-	
+
 	@Override
 	public int boardUpdate(BoardVO boardVO) throws Exception {
-		return sqlSession.update(NAMESPACE+"boardUpdate", boardVO);
+		// TODO Auto-generated method stub
+		return 0;
 	}
-	
+
 	@Override
 	public int hitUpdate(long num) throws Exception {
-		return sqlSession.update(NAMESPACE+"hitUpdate", num);
+		// TODO Auto-generated method stub
+		return 0;
 	}
-	
-	
+
 }
