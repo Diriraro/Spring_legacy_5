@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.iu.s5.board.BoardDAO;
 import com.iu.s5.board.BoardVO;
+import com.iu.s5.board.page.Pager;
 
 @Repository
 public class NoticeDAO implements BoardDAO{
@@ -20,14 +21,14 @@ public class NoticeDAO implements BoardDAO{
 	private final String NAMESPACE = "com.iu.s5.notice.NoticeDAO.";
 	
 	@Override
-	public long boardCount() throws Exception {
+	public long boardCount(Pager pager) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+"boardCount");
 	}
 	
 	//noticeList
 	@Override
-	public List<BoardVO> boardList(Map<String, Integer> map) throws Exception {
-		return sqlSession.selectList(NAMESPACE+"boardList", map);
+	public List<BoardVO> boardList(Pager pager) throws Exception {
+		return sqlSession.selectList(NAMESPACE+"boardList", pager);
 	}
 
 	@Override

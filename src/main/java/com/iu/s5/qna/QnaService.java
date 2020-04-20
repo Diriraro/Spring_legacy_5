@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.iu.s5.board.BoardService;
 import com.iu.s5.board.BoardVO;
+import com.iu.s5.board.page.Pager;
 
 @Service
 public class QnaService implements BoardService  {
@@ -15,7 +16,7 @@ public class QnaService implements BoardService  {
 	private QnaDAO qnaDAO;
 
 	@Override
-	public List<BoardVO> boardList(int curPage) throws Exception {
+	public List<BoardVO> boardList(Pager pager) throws Exception {
 		
 		return null;
 	}

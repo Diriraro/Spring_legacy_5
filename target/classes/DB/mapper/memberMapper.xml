@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.iu.s5.member.MemberDAO">
+  
+	  <sql id="search">
+	  	like '%'||#{search}||'%'
+	  </sql>
+	  
+	  <select id="memberCount" parameterType="com.iu.s5.member.memberPage.Pager" resultType="java.lang.Long">
+	  	SELECT COUNT(rownum) FROM member
+	  	<where>
+	  		<if test="kind=='bi'">
+	  			id <include refid="search"></include>
+	  		</if>
+	  		<if test="kind=='bn'">
+	  			name <include refid="search"></include>
+	  		</if>
+	  		<if test="kind=='bp'">
+	  			phone <include refid="search"></include>
+	  		</if>
+	  		<if test="kind=='be'">
+	  			email <include refid="search"></include>
+	  		</if>
+	  	</where>
+	  </select>
+  	
+  	 <select id="memberList" parameterType="com.iu.s5.member.memberPage.Pager" resultType="com.iu.s5.member.MemberVO">
+  	 	SELECT * FROM
+  	 		(SELECT N.*, rownum R FROM
+  	 		(SELECT * FROM member WHERE
+  	 		<choose>
+  	 			<when test="kind=='bi'">
+  	 				id
+  	 			</when>
+  	 			<when test="kind=='bn'">
+  	 				name
+  	 			</when>
+  	 			<when test="kind=='bp'">
+  	 				phone
+  	 			</when>
+  	 			<otherwise>
+  	 				email
+  	 			</otherwise>
+  	 		</choose>
+  	 		like '%'||#{search}||'%'  ) N)
+			where R between #{startRow} and #{lastRow}
+  	 
+  	 </select>
+  	 
+  	 <insert id="memberJoin" parameterType="com.iu.s5.member.MemberVO">
+  	 	INSERT INTO member VALUES(#{id}, #{pw}, #{name}, #{email}, #{phone}, #{age})
+  	 </insert>
+  
+  
+  </mapper>
