@@ -1,4 +1,4 @@
-package com.iu.s5.board.page;
+package com.iu.s5.util;
 
 public class Pager {
 
@@ -21,7 +21,7 @@ public class Pager {
 	
 
 	public void makeRow() {
-		System.out.println("curPage : " + this.getCurPage());
+		
 		this.startRow = (this.getCurPage() - 1) * this.getPerPage() + 1;
 		this.lastRow = this.getCurPage() * this.getPerPage();
 	}
@@ -45,7 +45,7 @@ public class Pager {
 		if(this.curPage%perBlock!=0) {
 			this.curBlock++;
 		}
-		System.out.println("curblock : "+curBlock);
+		
 		// 5. curBlock startNum, lastNum 계산
 		this.startNum = (this.curBlock-1)*perBlock+1;
 		this.lastNum = curBlock*perBlock;

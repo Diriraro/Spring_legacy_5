@@ -15,19 +15,22 @@
 	<div class="row">
 	<h1>${board} List</h1>
 	
-		<form class="col-xs-4" action="./memberList">
-			<div class="input-group">
+		<form class="form-inline" action="./memberList">
+			 <div class="input-group input-group-sm col-xs-2">
 				<select class="form-control" id="sel1" name="kind">
 					<option value="bi">ID</option>
 					<option value="bn">Name</option>
 					<option value="bp">Phone</option>
 					<option value="be">Email</option>
 				</select>
+			</div>
+			  <div class="input-group input-group-sm col-xs-4">
 				<input type="text" class="form-control" placeholder="Search" name="search">
 				<div class="input-group-btn">
 					<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
 				</div>
 			</div>
+			
 		</form>
 		
 		<table class="table table-hover">
