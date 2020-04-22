@@ -10,10 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.iu.s5.member.memberFile.MemberFileVO;
 import com.iu.s5.util.Pager;
 
 @Controller
@@ -46,9 +49,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value= "memberJoin", method = RequestMethod.POST)
-	public ModelAndView memberJoin(MemberVO memberVO, String avatar, ModelAndView mv) throws Exception {
+	public ModelAndView memberJoin(MemberVO memberVO, MultipartFile avatar, ModelAndView mv, HttpSession session) throws Exception {
 		
-		int result = memberService.memberJoin(memberVO);
+		int result = memberService.memberJoin(memberVO, avatar, session);
 		String msg ="Member Join Fail";
 		if(result>0) {
 			msg = "Member Join Success";
@@ -99,7 +102,11 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value= "memberPage")
-	public void memberPage() {
+	public void memberPage(HttpSession session, Model model)throws Exception {
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		MemberFileVO memberFileVO = memberService.fileSelect(memberVO.getId());
+		model.addAttribute("file", memberFileVO);
+		
 		
 	}
 
@@ -144,6 +151,15 @@ public class MemberController {
 		}
 		
 		return mv;
+	}
+	
+	@GetMapping("fileDelete")
+	public String fileDelete(HttpSession session,String id,Model model)throws Exception{
+		System.out.println("abc");
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		memberService.fileDelete(memberVO.getId(), session);
+		
+		return "redirect:./memberPage";
 	}
 	
 }
