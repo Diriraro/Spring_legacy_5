@@ -8,7 +8,6 @@ public class QnaVO extends BoardVO{
 	private long step;
 	private long depth;
 	
-	
 	public long getRef() {
 		return ref;
 	}
@@ -29,5 +28,5 @@ public class QnaVO extends BoardVO{
 	}
 	
 	
-	
+
 }

@@ -14,7 +14,7 @@
 	</select>
 	
 	<delete id="fileDelete" parameterType="String">
-		DELETE memberfile WHERE id=#{id}
+		DELETE MEMBERFILE WHERE ID=#{id}
 	</delete>
 
 </mapper>  

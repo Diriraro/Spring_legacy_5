@@ -1,5 +1,6 @@
 package com.iu.s5.member;
 
+import com.iu.s5.member.memberFile.MemberFileVO;
 
 public class MemberVO {
 	private String id;
@@ -8,7 +9,14 @@ public class MemberVO {
 	private String email;
 	private String phone;
 	private int age;
+	private MemberFileVO memberFileVO;
 	
+	public MemberFileVO getMemberFileVO() {
+		return memberFileVO;
+	}
+	public void setMemberFileVO(MemberFileVO memberFileVO) {
+		this.memberFileVO = memberFileVO;
+	}
 	public String getId() {
 		return id;
 	}

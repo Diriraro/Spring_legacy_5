@@ -18,7 +18,7 @@
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="id">ID:</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="id" value="${id}" placeholder="Enter ID" name="id">
+						<input type="text" class="form-control" id="id" placeholder="Enter ID" name="id">
 					</div>
 				</div>
 				
@@ -74,6 +74,20 @@
 
 		</div>
 	</div>
+	
+	<script type="text/javascript">
+		$("#id").blur(function() {
+			var id = $("#id").val();
+			$.post("./memberIdCheck", {id:id}, function(data) {
+				alert(data);
+				if(result==1){
+					alert("중복아이디입니다");
+					check=0;
+				}
+			});
+		});
+		
+	</script>
 
 </body>
 </html>
