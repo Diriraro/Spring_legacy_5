@@ -8,9 +8,6 @@
 <title>Insert title here</title>
 <c:import url="../template/boot.jsp"></c:import>
 <c:import url="../template/summer.jsp"></c:import>
-<!-- include summernote css/js -->
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
 </head>
 <body>
 <c:import url="../template/header_sub.jsp"></c:import>
@@ -45,15 +42,8 @@
 		</form>
 		
 	</div>
-<script type="text/javascript" >
-$(document).ready(function() {
-	  $('#contents').summernote({
-		  height:400,
-		  minHeight:400,
-		  maxHeight:400,
-		  focus : true
-	  });
-	});
+<script type="text/javascript" src="../resources/js/boardForm.js">
+
 </script>	
 </body>
 </html>

@@ -80,7 +80,12 @@
 	<delete id="memberDelete" parameterType="MemberVO">
 		delete member where id=#{id}
 	</delete>
-
 	
+	<delete id="memberDeletes" parameterType="List">
+		DELETE member WHERE id IN 
+		<foreach collection="list" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
 
 </mapper>  

@@ -20,8 +20,7 @@ import com.iu.s5.board.file.BoardFileVO;
 public class FileDown extends AbstractView {
 	
 	@Override
-	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,HttpServletResponse response) throws Exception {
 		
 		BoardFileVO boardFileVO = (BoardFileVO)model.get("file");
 		String fileNmae = boardFileVO.getFileName();

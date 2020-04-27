@@ -1,5 +1,6 @@
 package com.iu.s5.member;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -43,7 +44,6 @@ public class MemberController {
 		return mv;
 	}
 	
-	
 	/*
 	 * public ModelAndView memberIdCheck(MemberVO memberVO)throws Exception{
 	 * ModelAndView mv = new ModelAndView();
@@ -53,6 +53,18 @@ public class MemberController {
 	 * 
 	 * return mv; }
 	 */	
+	
+	@GetMapping("memberLists")
+	public ModelAndView memberLists(Pager pager)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		List<MemberVO> ar = memberService.memberList(pager);
+		mv.addObject("list", ar);
+		mv.addObject("pager", pager);
+		mv.setViewName("member/memberLists");
+		
+		return mv;
+	}
+	
 	@RequestMapping(value="memberList", method = RequestMethod.GET)
 	public ModelAndView memberList(Pager memberPager, ModelAndView mv)throws Exception{
 		List<MemberVO> ar = memberService.memberList(memberPager);
@@ -187,6 +199,19 @@ public class MemberController {
 		memberService.fileDelete(memberVO.getId(), session);
 		
 		return "redirect:./memberPage";
+	}
+	
+	@GetMapping("memberDeletes")
+	public ModelAndView memberDeletes(String[] ids)throws Exception{
+		//배열을 list로 변환
+		ModelAndView mv = new ModelAndView();
+		List<String> list = Arrays.asList(ids);
+		int result = memberService.memberDeletes(list);
+		System.out.println(result);
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
+		
+		return mv;
 	}
 	
 }

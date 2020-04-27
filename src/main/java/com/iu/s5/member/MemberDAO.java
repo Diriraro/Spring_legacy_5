@@ -15,6 +15,10 @@ public class MemberDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE="com.iu.s5.member.MemberDAO.";
 	
+	public int memberDeletes(List<String> list)throws Exception{
+		return sqlSession.delete(NAMESPACE+"memberDeletes", list);
+	}
+	
 	public MemberVO memberIdCheck(MemberVO memberVO)throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"memberIdCheck", memberVO);
 	}

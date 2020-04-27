@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,27 +10,31 @@
 </head>
 <body>
 <c:import url="../template/header_sub.jsp"></c:import>
-<h1>${board} Reply form</h1>
-
-
-<form action="./${board}Reply" method="post">
-	<input type="hidden" name="num" value="${num}">
-	<div class="form-group">
-	<label for="title">Title</label>
-      <input type="text" class="form-control" id="title" name="title" >
-    </div>
-	<div class="form-group">
-      <label for="writer">Writer:</label>
-      <input type="text" class="form-control" id="writer" placeholder="Enter Subject" name="writer">
-    </div>
-		<div class="form-group">
-			<label for="contents">Contents:</label>
-			<textarea class="form-control" rows="20" id="contents"
-				placeholder="Enter Contents" name="contents"></textarea>
-
-			<button type="submit" class="btn btn-default">Submit</button>
-		</div>
-	</form>
-
+	<div class="container">
+		<h1>${board} reply Form</h1>
+		
+		
+		<form action="./${board}Reply" id="frm" method="post">
+		  <input type="hidden" name="num" value="${num}">
+		  <div class="form-group">
+		    <label for="title">Title:</label>
+		    <input type="text" class="form-control" id="title" name="title">
+		  </div>
+		  <div class="form-group">
+		    <label for="Writer">Writer:</label>
+		    <input type="text" class="form-control" id="reply" name="writer">
+		  </div>
+		 <div class="form-group" >
+		    <label for="contents">Contents:</label>
+		    <textarea rows="5" cols="" class="form-control" id="contents" name="contents"></textarea>
+		  </div> 
+		  
+		  
+		  
+		  
+		  <input type="submit" id="btn" class="btn btn-default" value="write">
+		</form>
+		
+	</div>
 </body>
 </html>

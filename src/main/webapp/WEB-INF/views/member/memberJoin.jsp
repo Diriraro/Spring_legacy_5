@@ -78,12 +78,19 @@
 	<script type="text/javascript">
 		$("#id").blur(function() {
 			var id = $("#id").val();
-			$.post("./memberIdCheck", {id:id}, function(data) {
-				alert(data);
-				if(result==1){
-					alert("중복아이디입니다");
-					check=0;
+			$.ajax({
+				type: "post",	//method 형식
+				url : "./memberIdCheck",	//url주소
+				data : {
+					id: id
+				}, 				//parameter
+				success: function(r){
+					alert(r);
+				},
+				error: function(){
+					alert("error 발생");
 				}
+				
 			});
 		});
 		

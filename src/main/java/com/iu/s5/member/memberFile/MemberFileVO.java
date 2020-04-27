@@ -6,7 +6,6 @@ public class MemberFileVO {
 	private String fileName;
 	private String oriName;
 	
-	
 	public String getId() {
 		return id;
 	}

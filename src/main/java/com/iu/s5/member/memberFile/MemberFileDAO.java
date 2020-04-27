@@ -17,18 +17,21 @@ public class MemberFileDAO {
 		return sqlSession.insert(NAMESPACE+"fileInsert", memberFileVO);
 	}
 	
-	//fileUPdate
+	//fileUpdate
 	public int fileUpdate(MemberFileVO memberFileVO)throws Exception{
 		return sqlSession.update(NAMESPACE+"fileUpdate", memberFileVO);
 	}
 	
 	//fileDelete
 	public int fileDelete(String id)throws Exception{
-		return sqlSession.delete(NAMESPACE+"fileSelect", id);
+		return sqlSession.delete(NAMESPACE+"fileDelete", id);
 	}
+	
 	
 	//fileSelect
 	public MemberFileVO fileSelect(String id)throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"fileSelect", id);
 	}
+	
+
 }
