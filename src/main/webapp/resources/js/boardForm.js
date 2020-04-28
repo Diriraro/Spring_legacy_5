@@ -2,7 +2,7 @@
  * 
  */
 
-	var count =1;
+	var count = 1;
 	
 	$("#file").on("click", ".remove", function() {
 		$(this).parent().remove();
@@ -57,9 +57,14 @@
 	
 	
 	// $("선택자").action();
-	$("#contents").summernote({
-		height: 300
-	});
+//	$("#contents").summernote({
+//		height: 300,
+//		callbacks: {
+//		    onImageUpload:function(file){
+//		    	alert("upload");
+//		    } 
+//		}
+//	});
 	
 	
 	

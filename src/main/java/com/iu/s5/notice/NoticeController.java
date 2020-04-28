@@ -48,13 +48,15 @@ public class NoticeController {
 	public String boardUpdate(long num, Model model)throws Exception{
 		 BoardVO boardVO = noticeService.boardSelect(num);
 		 model.addAttribute("vo", boardVO);
+//		 NoticeVO noticeVO = (NoticeVO)boardVO;							// update에서 파일제한 5개를 걸기 위해
+//		 model.addAttribute("size", noticeVO.getBoardFileVOs().size());	// 이미 첨부된 파일의 갯수를 세는 용도
 		return "board/boardUpdate";
 	}
 	
 	@RequestMapping(value = "noticeUpdate", method = RequestMethod.POST)
-	public String boardUpdate(NoticeVO noticeVO)throws Exception{
+	public String boardUpdate(NoticeVO noticeVO, MultipartFile[] files)throws Exception{
 		 
-		int result = noticeService.boardUpdate(noticeVO);
+		int result = noticeService.boardUpdate(noticeVO, files);
 		String path="";
 		
 		if(result>0) {

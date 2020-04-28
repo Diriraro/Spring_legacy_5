@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,10 +13,10 @@
 <body>
 <c:import url="../template/header_sub.jsp"></c:import>
 	<div class="container">
-		<h1>${board} Update Form</h1>
+		<h1>${fn:toUpperCase(board)} Update Form</h1>
 		
 		
-		<form action="./${board}Update" id="frm" method="post">
+		<form action="./${board}Update" id="frm" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="num" value="${vo.num}">
 		  <div class="form-group">
 		    <label for="title">Title:</label>
@@ -28,15 +29,18 @@
 		 <div class="form-group" >
 		    <label for="contents">Contents:</label>
 		    <textarea rows="5" cols="" class="form-control" id="contents" name="contents"></textarea>
-		  </div> 
-		  
-		  <div class="form-group" >
-		  	<label for="files">Files:</label>
-		  	<c:forEach items="${vo.boardFileVOs}" var="fileVO">
-		  	<p>${fileVO.oriName}<i id="${fileVO.fileNum}" class="glyphicon glyphicon-remove remove fileDelete"></i></p>
-		  	</c:forEach>
 		  </div>
 		  
+		  <input type="button" id="add" class="btn btn-info" value="AddFile">
+		  <div id="file">
+		  
+		   </div>
+			  <div class="form-group" >
+			  	<label for="files">Files:</label>
+			  	<c:forEach items="${vo.boardFileVOs}" var="fileVO">
+				  	<p>${fileVO.oriName}<i id="${fileVO.fileNum}" title="${fileVO.board}" class="glyphicon glyphicon-remove remove fileDelete"></i></p>
+			  	</c:forEach>
+			  </div>
 		  
 		  <input type="submit" id="btn" class="btn btn-default" value="Write">
 		</form>
@@ -44,21 +48,31 @@
 	</div>
 	
 	
+	<script type="text/javascript" src="../resources/js/boardForm.js"></script>
 	<script type="text/javascript">
 		$("#contents").summernote('code', '${vo.contents}');
 		
-		var num = $("#num").val();
+		
+		size = ${vo.boardFileVOs.size()};
+		
+		count = count+size;
+		
 		$(".fileDelete").click(function() {
-			var s = $(this);
-			$.post("../boardFile/fileDelete", {fileNum:$(this).attr("id")}, function(data) {
+			
+			var check = confirm("정말 지울 거냐??");
+			
+			if(check){
+				var s = $(this);
 				
-				alert(data.trim());
-				if(data.trim()>0){
-					s.parent().remove();
-				}else{
-					alert("File Delete Fail");
-				}
-			});
+				$.post("../boardFile/fileDelete", {fileNum:$(this).attr("id"), board:$(this).attr("title")}, function(data) {
+					if(data.trim()>0){
+						s.parent().remove();
+						count--;
+					}else {
+						alert("File Delete Fail");
+					}
+				} );
+			}
 		});
 	</script>
 	

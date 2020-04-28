@@ -49,7 +49,6 @@ public class NoticeService implements BoardService {
 
 	@Override
 	public int boardWrite(BoardVO boardVO, MultipartFile [] files) throws Exception {
-		// TODO Auto-generated method stub
 		
 		String path = servletContext.getRealPath("/resources/uploadnotice");
 		System.out.println(path);
@@ -74,14 +73,42 @@ public class NoticeService implements BoardService {
 	}
 
 	@Override
-	public int boardUpdate(BoardVO boardVO) throws Exception {
-		// TODO Auto-generated method stub
-		return noticeDAO.boardUpdate(boardVO);
+	public int boardUpdate(BoardVO boardVO, MultipartFile [] files) throws Exception {
+
+		//HDD file SAVE
+		String path = servletContext.getRealPath("/resources/uploadnotice");
+		System.out.println(path);
+		int result = noticeDAO.boardUpdate(boardVO);
+		for(MultipartFile multipartFile:files) {
+			 
+			if(multipartFile.getSize()>0) {
+				BoardFileVO boardFileVO = new BoardFileVO();
+				
+				boardFileVO.setFileName(fileSaver.saveByUtils(multipartFile, path));
+				boardFileVO.setOriName(multipartFile.getOriginalFilename());
+				boardFileVO.setNum(boardVO.getNum());
+				boardFileVO.setBoard(1);
+				result = boardFileDAO.fileInsert(boardFileVO);
+			}
+		}
+		
+		return result;
 	}
 
 	@Override
 	public int boardDelete(long num) throws Exception {
-		// TODO Auto-generated method stub
+		List<BoardFileVO> list = boardFileDAO.fileList(num);
+		//1. HDD에서 해당 파일들을 삭제
+		String path = servletContext.getRealPath("/resources/uploadnotice");
+		System.out.println(path);
+		
+		for(BoardFileVO boardFileVO : list) {
+			fileSaver.deleteFile(boardFileVO.getFileName(), path);
+		}
+		
+		//2. 데이터베이스에서 삭제
+		boardFileDAO.fileDeleteAll(num);
+		
 		return noticeDAO.boardDelete(num);
 	}
 
