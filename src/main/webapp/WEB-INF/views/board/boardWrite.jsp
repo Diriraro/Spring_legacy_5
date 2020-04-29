@@ -42,9 +42,9 @@
 		</form>
 		
 	</div>
-<!-- <script type="text/javascript" src="../resources/js/boardForm.js"> 
+<script type="text/javascript" src="../resources/js/boardForm.js"> 
 </script>	
--->
+
 
 	<script type="text/javascript">
 	$("#contents").summernote({

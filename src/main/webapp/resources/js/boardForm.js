@@ -31,7 +31,7 @@
 		});
 		
 		var ch1 = title !="";
-		var ch2 = $("#contents").summernote('isEmpty');
+		var ch2 = $("#contents").summernote('isEmpty');    
 		
 		if(ch1 && !ch2 && ch3){
 			//form 전송(submit event 강제 발생)
