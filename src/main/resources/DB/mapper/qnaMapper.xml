@@ -55,7 +55,6 @@
   		(SELECT ref FROM qna WHERE num=#{num}), 
   		(SELECT step FROM qna WHERE num = #{num})+1,
   		(SELECT depth FROM qna WHERE num=#{num})+1 )
-  		
   	</insert>
   		
   </mapper>

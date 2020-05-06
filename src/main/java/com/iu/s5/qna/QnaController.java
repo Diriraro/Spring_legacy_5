@@ -25,6 +25,23 @@ public class QnaController {
 	public String getBoard() throws Exception {
 		return "qna";
 	}
+	
+	@GetMapping("qnaUpdate")
+	public ModelAndView boardUpdate(long num)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		BoardVO boardVO = qnaService.boardSelect(num);
+		mv.addObject("vo", boardVO);
+		mv.setViewName("board/boardUpdate");
+		return mv;
+	}
+	
+	@PostMapping("qnaUpdate")
+	public ModelAndView boardUpdate(BoardVO boardVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		
+		return mv;
+	}
 
 	@GetMapping("qnaList")
 	public ModelAndView boardList(Pager pager, ModelAndView mv) throws Exception{
