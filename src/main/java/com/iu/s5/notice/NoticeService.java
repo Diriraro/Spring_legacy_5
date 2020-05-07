@@ -60,13 +60,13 @@ public class NoticeService implements BoardService {
 		
 		for(MultipartFile file : files) {
 			if(file.getSize()>0) {
-			BoardFileVO boardFileVO = new BoardFileVO();
-			String fileName = fileSaver.saveByTransfer(file, path);
-			boardFileVO.setNum(boardVO.getNum());
-			boardFileVO.setFileName(fileName);
-			boardFileVO.setOriName(file.getOriginalFilename());
-			boardFileVO.setBoard(1);
-			boardFileDAO.fileInsert(boardFileVO);
+				BoardFileVO boardFileVO = new BoardFileVO();
+				String fileName = fileSaver.saveByTransfer(file, path);
+				boardFileVO.setNum(boardVO.getNum());
+				boardFileVO.setFileName(fileName);
+				boardFileVO.setOriName(file.getOriginalFilename());
+				boardFileVO.setBoard(1);
+				boardFileDAO.fileInsert(boardFileVO);
 			}
 		}
 		return result;
